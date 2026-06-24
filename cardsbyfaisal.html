@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Tamu Digital</title>
+    <style>
+        /* ==========================================
+           1. PENGATURAN UMUM & RESET DEFAULT BROWSER
+           ========================================== */
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ==========================================
+           2. LATAR BELAKANG HALAMAN UTAMA (BODY)
+           ========================================== */
+        /* Mengatur gambar latar belakang bunga yang menempel statis di layar */
+        body {
+            background-image: url(flower-7957017_1280.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        /* ==========================================
+           3. BINGKAI / TABEL CONTAINER PALING BESAR
+           ========================================== */
+        /* Wadah pembungkus utama seluruh elemen di halaman web */
+        .container {
+            max-width: 900px;
+            margin: 0 auto; 
+            padding: 30px;
+            border-radius: 12px;
+            /* Bingkai garis biru neon */
+            border: 2px solid #787878;
+            box-shadow: 0 0 15px rgba(55, 43, 43, 0.2);
+        }
+
+        /* Gaya teks untuk Judul Utama Halaman */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+        }
+
+        /* ==========================================
+           4. KOTAK INFORMASI / DASHBOARD ANGKA RANGKUMAN
+           ========================================== */
+        /* Struktur Grid pembagi baris rangkuman menjadi 3 kolom sejajar */
+        .summary-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Desain masing-masing kotak kecil (Card) di dalam Dashboard Angka */
+        .card {
+            background: rgba( 0, 0, 0, 0.8);
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            /* Kolom berbingkai garis biru */
+            border: 1px solid #ffffff;
+        }
+
+        /* Judul teks deskripsi angka di dalam Kotak Informasi */
+        .card h3 {
+            font-size: 13px;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* Angka kalkulasi data statistik di dalam Kotak Informasi */
+        .card p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        /* ==========================================
+           5. KOTAK FORM INPUT PENGISIAN DATA TAMU
+           ========================================== */
+        /* Wadah hitam transparan tempat meletakkan input isian tamu */
+        .form-tamu {
+            background: rgba( 0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ffffff;
+            margin-bottom: 30px;
+        }
+
+        /* Jarak pembatas vertikal antar baris kelompok form */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Pengatur tata letak agar Nama Anda & Konfirmasi Kehadiran membagi baris jadi 2 kolom horizontal */
+        .form-row-inline {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Gaya teks teks petunjuk (label) di atas kolom input */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        /* Gaya visual untuk kolom mengetik teks, area teks pesan, dan pilihan select drop-down */
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #ffffff;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* Efek pendaran cahaya putih tipis ketika elemen kolom sedang aktif diklik/diketik */
+        input[type="text"]:focus, textarea:focus, select:focus {
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Batasan tinggi khusus untuk area mengetik Ucapan Selamat */
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        /* ==========================================
+           6. DESAIN TOMBOL-TOMBOL AKSI (BUTTONS)
+           ========================================== */
+        /* Tombol bawaan standar untuk pengiriman data tamu */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba( 255, 255, 255, 0.7);
+            color: #0b0c10;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        /* Efek perubahan warna tombol kirim ketika disentuh kursor */
+        button:hover {
+            background-color: rgba( 255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(44, 44, 44, 0.6);
+        }
+
+        /* Desain tombol pengalih slide halaman (khusus tamu yang mengonfirmasi "Hadir") */
+        .btn-lanjutkan {
+            margin-top: 15px;
+            background-color : rgba( 255, 255, 255, 0.6); /* Warna cyan cerah agar kontras */
+            color: #0b0c10;
+            display: none; /* SEMBUNYIKAN DI AWAL */
+        }
+        
+        /* Efek perubahan warna tombol lanjut menjadi hijau ketika disentuh kursor */
+        .btn-lanjutkan:hover {
+            background-color: #00a130;
+            box-shadow: 0 0 15px rgba(93, 179, 107, 0.6);
+        }
+
+        /* ==========================================
+           7. DESAIN TABEL DAFTAR DATA UCAPAN TAMU
+           ========================================== */
+        /* Wadah pembungkus tabel agar sudut sisinya membulat rapi */
+        .tabel-container {
+            background: rgba( 0, 0, 0, 0.6);
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Struktur tabel data */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* Pengaturan jarak ruang sel dan garis pembatas horizontal isi baris tabel */
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: rgba( 255, 255, 255  , 0.2);
+        }
+
+        /* Gaya visual khusus untuk Baris Judul Kolom Tabel (Header) */
+        th {
+            background-color: rgba( 0, 0, 0, 0.6);
+            color: #ffffff;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        /* Efek perubahan warna baris isi data tabel sewaktu disentuh kursor */
+        tr:hover {
+            background-color: rgba( 0, 0, 0, 0.6);
+        }
+
+        /* ==========================================
+           8. DEKORASI LABEL STATUS (BADGE) & TEKS UCAPAN
+           ========================================== */
+        /* Desain dasar label penanda status kehadiran */
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        /* Penanda warna hijau transparan untuk status Hadir */
+        .badge-hadir { background-color: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+        /* Penanda warna merah transparan untuk status Tidak Hadir */
+        .badge-absen { background-color: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+        
+        /* Modifikasi jenis tulisan untuk kolom pesan ucapan selamat */
+        .ucapan-text {
+            font-style: italic;
+            color: #a9a9a9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <h1>Buku Tamu & Ucapan Selamat</h1>
+
+        <div class="summary-box">
+            <div class="card">
+                <h3>Total Tamu</h3>
+                <p id="totalTamu">0</p>
+            </div>
+            <div class="card">
+                <h3>Hadir</h3>
+                <p id="totalHadir">0</p>
+            </div>
+            <div class="card">
+                <h3>Tidak Hadir</h3>
+                <p id="totalAbsen">0</p>
+            </div>
+        </div>
+        <div class="form-tamu">
+            
+            <div class="form-row-inline">
+                <div class="form-group">
+                    <label for="namaTamu">Nama Anda :</label>
+                    <input type="text" id="namaTamu" placeholder="Ketik nama Anda di sini...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="statusTamu">Konfirmasi Kehadiran :</label>
+                    <select id="statusTamu">
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir (Absen)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ucapanTamu">Ucapan Selamat / Pesan :</label>
+                <textarea id="ucapanTamu" placeholder="Tulis ucapan selamat atau pesan Anda di sini..."></textarea>
+            </div>
+
+            <button onclick="kirimDataTamu()">Kirim Kehadiran & Ucapan</button>
+            
+            <button id="tombolLanjut" class="btn-lanjutkan" onclick="pindahSlide()">Lanjutkan ke Slide Berikutnya &rarr;</button>
+        </div>
+        <div class="tabel-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Nama</th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 60%;">Ucapan Selamat</th>
+                    </tr>
+                </thead>
+                <tbody id="listTamu">
+                </tbody>
+            </table>
+        </div>
+        </div>
+    <script>
+        // Mengambil data dari localStorage biar kalau di-refresh datanya tidak hilang
+        // Jika masih kosong, set sebagai array kosong []
+        let dataTamu = JSON.parse(localStorage.getItem('bukuTamuDigital')) || [];
+
+        // Fungsi Otomatis Pembuat Baris-Kolom Tabel Berdasarkan Simpanan Data Array Tamu
+        function renderTamu() {
+            const listTamu = document.getElementById('listTamu');
+            listTamu.innerHTML = ''; 
+
+            let jmlHadir = 0;
+            let jmlAbsen = 0;
+
+            // Membalik urutan agar tamu yang baru mengisi muncul di paling atas
+            const dataTerbalik = [...dataTamu].reverse();
+
+            // Melakukan perulangan data untuk memasukkan tag <tr> (baris) dan <td> (kolom) baru ke dalam tabel
+            dataTerbalik.forEach((tamu) => {
+                if (tamu.status === "Hadir") jmlHadir++;
+                if (tamu.status === "Tidak Hadir") jmlAbsen++;
+
+                const badgeClass = tamu.status === "Hadir" ? "badge-hadir" : "badge-absen";
+                
+                // Berikan teks alternatif jika tamu tidak mengisi ucapan
+                const teksUcapan = tamu.ucapan ? tamu.ucapan : "-";
+
+                // Memasukkan susunan kolom data teks ke baris tabel (tbody)
+                listTamu.innerHTML += `
+                    <tr>
+                        <td><strong>${tamu.nama}</strong></td>
+                        <td><span class="badge ${badgeClass}">${tamu.status}</span></td>
+                        <td class="ucapan-text">"${teksUcapan}"</td>
+                    </tr>
+                `;
+            });
+
+            // Update angka hitungan numerik secara realtime di panel kotak informasi atas
+            document.getElementById('totalTamu').innerText = dataTamu.length;
+            document.getElementById('totalHadir').innerText = jmlHadir;
+            document.getElementById('totalAbsen').innerText = jmlAbsen;
+        }
+
+        // Fungsi penangan sistem saat tamu menekan tombol Kirim data
+        function kirimDataTamu() {
+            const inputNama = document.getElementById('namaTamu');
+            const inputStatus = document.getElementById('statusTamu');
+            const inputUcapan = document.getElementById('ucapanTamu');
+
+            const nama = inputNama.value.trim();
+            const status = inputStatus.value;
+            const ucapan = inputUcapan.value.trim();
+
+            // Validasi pengecekan agar form wajib diisi kolom namanya
+            if (nama === "") {
+                alert("Silakan masukkan nama Anda sebelum mengirim!");
+                return;
+            }
+
+            // Simpan data baru ke dalam array penampung dataTamu
+            dataTamu.push({
+                nama: nama,
+                status: status,
+                ucapan: ucapan
+            });
+
+            // Simpan array terbaru ke penyimpanan internal browser (localStorage)
+            localStorage.setItem('bukuTamuDigital', JSON.stringify(dataTamu));
+
+            // Reset form isi inputan menjadi kosong kembali untuk tamu berikutnya
+            inputNama.value = "";
+            inputUcapan.value = "";
+            inputStatus.value = "Hadir";
+
+            // Tampilkan notifikasi balon pesan sukses dan menyusun ulang isi data tabel terbaru
+            alert("Terima kasih! Data Anda telah tersimpan.");
+            renderTamu();
+
+            // PERUBAHAN LOGIKA DI SINI (UNTUK BELAJAR):
+            // Kita cek variabel 'status' yang diinput tamu.
+            if (status === "Hadir") {
+                // Jika statusnya "Hadir", tampilkan tombol lanjut ke slide berikutnya
+                document.getElementById('tombolLanjut').style.display = "block";
+            } else {
+                // Jika statusnya bukan "Hadir" (alias Tidak Hadir), pastikan tombol tetap tersembunyi
+                document.getElementById('tombolLanjut').style.display = "none";
+            }
+        }
+
+        // Logika fungsi pemindah halaman ketika tombol Lanjutkan diklik oleh pengguna
+        function pindahSlide() {
+            window.location.href = 'slide2.html'; 
+        }
+
+        // Memanggil fungsi penampil data tabel pertama kali sewaktu halaman selesai dimuat utuh oleh browser
+        renderTamu();
+    </script>
+
+</body>
+</html>
