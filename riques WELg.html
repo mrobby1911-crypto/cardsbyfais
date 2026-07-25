@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Model Custom - WEL-G</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #787879; /* Sama dengan latar kartu beranda */
+            color: #333333;
+            min-height: 100vh;
+        }
+
+        /* Top Header (Sama dengan Header Beranda WEL-G) */
+        .site-header {
+            background-color: #1c1d1f;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 15px;
+        }
+
+        .site-header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .site-header p {
+            font-size: 0.95rem;
+            color: #cccccc;
+        }
+
+        /* Banner Utama Form (Sama dengan Biru Dongker Beranda) */
+        .page-banner {
+            background-color: #2d4052;
+            color: #ffffff;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .page-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .page-banner p {
+            color: #404041;
+            font-size: 1rem;
+        }
+
+        /* Container Formulir */
+        .container {
+            max-width: 700px;
+            margin: -20px auto 50px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Card Form Putih Bersih */
+        .form-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 35px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e1e8ed;
+        }
+
+        /* Tombol Navigasi Kembali */
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            color: #2d4052;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-back:hover {
+            color: #e67e22;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            color: #333;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #2d4052;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(45, 64, 82, 0.1);
+        }
+
+        /* Upload File Box */
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 6px;
+            background: #f8f9fa;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .file-upload:hover {
+            background: #edf2f7;
+            border-color: #e67e22;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-label {
+            color: #2d4052;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Tombol Kirim (Oranye - Sama dengan Tombol 'Tentang Kami') */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #e67e22; /* Warna Oranye Beranda */
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #d35400;
+            transform: translateY(-1px);
+        }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            color: #e67e22; /* Teks Oranye */
+            border: 2px solid #e67e22; /* BINGKAI ORANYE */
+            background-color: transparent;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-back:hover {
+            background-color: #e67e22; /* Efek Hover Fill Oranye */
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.25);
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header WEL-G (Sesuai Beranda) -->
+    <header class="site-header">
+        <h1>WEL-G</h1>
+        <p>Custom Furniture & Professional Welding Service</p>
+    </header>
+
+    <!-- Banner Sub-Judul -->
+    <section class="page-banner">
+        <h2>🛠️ Request Model Custom</h2>
+        <p>Bisa Request Bentuk, Model, dan Ukuran Apapun. Kami Siap Kerjakan!</p>
+    </section>
+
+    <!-- Form Area -->
+    <div class="container">
+        <div class="form-card">
+            <!-- Tombol Kembali -->
+            <a href="welding website.html" class="nav-back">← Kembali ke Beranda</a>
+
+            <form id="customForm" onsubmit="sendToWhatsApp(event)">
+                <!-- Data Pemesan -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap *</label>
+                        <input type="text" id="nama" placeholder="Nama Lengkap Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsapp">Nomor WhatsApp *</label>
+                        <input type="tel" id="whatsapp" placeholder="08*********" required>
+                    </div>
+                </div>
+
+                <!-- Jenis Benda -->
+                <div class="form-group">
+                    <label for="jenisBenda">Jenis Benda / Perabot yang Ingin Dibuat *</label>
+                    <select id="jenisBenda" required>
+                        <option value="" disabled selected>-- Pilih Jenis Perabot --</option>
+                        <option value="Meja Custom (Makan/Konsol/Kerja)">Meja Custom (Makan / Konsol / Kerja)</option>
+                        <option value="Kursi / Bangku Besi">Kursi / Bangku Besi</option>
+                        <option value="Rak Display / Rak Buku Industrial">Rak Display / Rak Buku Industrial</option>
+                        <option value="Rangka Tempat Tidur Besi">Rangka Tempat Tidur Besi</option>
+                        <option value="Kanopi / Pagar / Teralis / Railing">Kanopi / Pagar / Teralis / Railing Tangga</option>
+                        <option value="Lainnya">Lainnya (Jelaskan di Catatan)</option>
+                    </select>
+                </div>
+
+                <!-- Estimasi Ukuran -->
+                <div class="form-group">
+                    <label for="ukuran">Estimasi Ukuran (Panjang x Lebar x Tinggi) *</label>
+                    <input type="text" id="ukuran" placeholder="Contoh: 120cm x 60cm x 75cm" required>
+                </div>
+
+                <!-- Material Utama -->
+                <div class="form-group">
+                    <label for="material">Preferensi Material Utama *</label>
+                    <select id="material" required>
+                        <option value="Besi Hollow + Kayu">Besi Hollow + Kombinasi Kayu (Industrial)</option>
+                        <option value="Full Stainless Steel">Full Stainless Steel (Modern / Mewah)</option>
+                        <option value="Full Besi / Logam">Full Besi / Logam (Kokoh)</option>
+                        <option value="Belum Yakin (Perlu Konsultasi)">Belum Yakin (Ingin Konsultasi Dulu)</option>
+                    </select>
+                </div>
+
+                <!-- Upload Referensi -->
+                <div class="form-group">
+                    <label>Foto Referensi / Sketsa Coretan (Opsional)</label>
+                    <label for="fileInput" class="file-upload">
+                        <span class="file-upload-label">📷 Klik untuk Unggah Foto / Sketsa Referensi</span>
+                        <input type="file" id="fileInput" accept="image/*" onchange="showFileName(this)">
+                        <small id="fileNameDisplay" style="color: #7f8c8d; margin-top: 5px;"></small>
+                    </label>
+                </div>
+
+                <!-- Catatan Detail -->
+                <div class="form-group">
+                    <label for="catatan">Catatan / Detail Model Khusus</label>
+                    <textarea id="catatan" rows="4" placeholder="Jelaskan detail khusus, seperti warna cat besi (hitam doff/gold), bentuk kaki, dll."></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit">Kirim Request ke WhatsApp WEL-G</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showFileName(input) {
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            if (input.files && input.files[0]) {
+                fileNameDisplay.textContent = "File terpilih: " + input.files[0].name;
+            }
+        }
+
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+
+            // Masukkan nomor WA Bisnis WEL-G (awali dengan 62)
+            const nomorWA = "6281234567890"; 
+
+            const nama = document.getElementById('nama').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const jenisBenda = document.getElementById('jenisBenda').value;
+            const ukuran = document.getElementById('ukuran').value;
+            const material = document.getElementById('material').value;
+            const catatan = document.getElementById('catatan').value || "Tidak ada catatan tambahan";
+
+            const textPesan = `Halo Tim WEL-G, saya ingin mengajukan *Request Model Custom*:%0A%0A` +
+                `👤 *Nama:* ${nama}%0A` +
+                `📱 *No. WA:* ${whatsapp}%0A` +
+                `📦 *Jenis Perabot:* ${jenisBenda}%0A` +
+                `📐 *Ukuran:* ${ukuran}%0A` +
+                `🧱 *Material:* ${material}%0A` +
+                `📝 *Catatan Detail:* ${catatan}%0A%0A` +
+                `*(Foto/sketsa referensi akan saya kirimkan setelah pesan ini)*`;
+
+            window.open(`https://wa.me/${nomorWA}?text=${textPesan}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil, Produk & Diferensiasi WEL-G</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333333;
+        }
+
+        /* ==================== TOMBOL KEMBALI MELAYANG (FLOATING) ==================== */
+        .btn-floating-back {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 999;
+            background-color: #e67e22;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-floating-back:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+        }
+
+        /* Header Utama (Singkron dengan Top Bar Beranda) */
+        .site-header {
+            background-color: #1c1d1f;
+            color: #ffffff;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .site-header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .site-header p {
+            font-size: 0.95rem;
+            color: #cccccc;
+        }
+
+        /* ==================== SECTION 1: KEUNGGULAN (HERO) ==================== */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            min-height: 550px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2d4052 0%, #1c2d3d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            gap: 40px;
+            color: #ffffff;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .hero-text h2 {
+            font-size: 1.3rem;
+            color: #e67e22;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e67e22;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .features-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .features-list li {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border-left: 4px solid #e67e22;
+            line-height: 1.5;
+            color: #ecf0f1;
+        }
+
+        .features-list strong {
+            color: #ffffff;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* Bingkai Belah Ketupat */
+        .rhombus-frame {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            background: #ffffff;
+            transform: rotate(45deg);
+            border-radius: 40px;
+            overflow: hidden;
+            border: 4px solid #e67e22;
+            box-shadow: -10px 10px 30px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rhombus-frame img {
+            width: 130%;
+            height: auto;
+            transform: rotate(-45deg);
+            object-fit: contain;
+        }
+
+        /* ==================== SECTION 2: DESKRIPSI PRODUK ==================== */
+        .description-banner {
+            position: relative;
+            width: 100%;
+            min-height: 550px;
+            overflow: hidden;
+            background-color: #f4f6f9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            gap: 40px;
+            color: #333333;
+        }
+
+        .desc-text {
+            flex: 1;
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .desc-text h2 {
+            font-size: 1.8rem;
+            color: #2d4052;
+            margin-bottom: 10px;
+        }
+
+        .desc-text .tagline {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #e67e22;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .desc-text .summary {
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 25px;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .desc-text h3 {
+            font-size: 1.1rem;
+            color: #2d4052;
+            margin-bottom: 12px;
+            border-left: 4px solid #e67e22;
+            padding-left: 10px;
+        }
+
+        .products-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .products-list li {
+            background: #ffffff;
+            padding: 12px 15px;
+            border-radius: 8px;
+            line-height: 1.4;
+            color: #2d4052;
+            border: 1px solid #e1e8ed;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .products-list strong {
+            color: #e67e22;
+        }
+
+        /* Bingkai Lingkaran */
+        .circle-frame-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .circle-frame {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            background: #ffffff;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid #2d4052;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle-frame img {
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* ==================== SECTION 3: DIFERENSIASI ==================== */
+        .diff-banner {
+            position: relative;
+            width: 100%;
+            min-height: 550px;
+            overflow: hidden;
+            background: #2d4052;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 8%;
+            gap: 40px;
+            color: #ffffff;
+        }
+
+        .diff-text {
+            flex: 1;
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .diff-text h2 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #e67e22;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .comparison-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 5px solid #e67e22;
+            color: #2d4052;
+        }
+
+        .comparison-box h3 {
+            font-size: 1.1rem;
+            color: #2d4052;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comp-item {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .comp-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .comp-item .label-bad {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .comp-item .label-good {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* Bingkai Hexagon */
+        .hexagon-frame-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .hexagon-frame {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            background: #ffffff;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 10px;
+        }
+
+        .hexagon-frame img {
+            width: 85%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* ==================== NAVIGASI BOTTOM / FOOTER ==================== */
+        .nav-back-container {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #1c1d1f;
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #e67e22;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-home:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+        }
+
+        /* RESPONSIVE DESAIN HP */
+        @media (max-width: 900px) {
+            .hero-banner, .description-banner, .diff-banner {
+                flex-direction: column-reverse;
+                padding: 40px 20px;
+            }
+
+            .description-banner {
+                flex-direction: column;
+            }
+
+            .rhombus-frame, .circle-frame, .hexagon-frame {
+                width: 250px;
+                height: 250px;
+            }
+
+            .btn-floating-back {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOMBOL MELAYANG (FLOATING BACK BUTTON) -->
+    <a href="welding website.html" class="btn-floating-back">← Kembali ke Beranda</a>
+
+    <!-- Header WEL-G -->
+    <header class="site-header">
+        <h1>WEL-G</h1>
+        <p>Custom Furniture & Professional Welding Service</p>
+    </header>
+
+    <!-- SECTION 1: KEUNGGULAN (HERO) -->
+    <section class="hero-banner">
+        <div class="hero-text">
+            <h1>🛠️ Profil Brand WEL-G</h1>
+            <h2>1. Keunggulan WEL-G</h2>
+            
+            <ul class="features-list">
+                <li>
+                    <strong>🎨 100% Custom Request:</strong>
+                    Bebas minta bentuk, model, hingga ukuran sesuka hati. Tinggal bawa contoh foto atau coretan sketsa, WEL-G siap wujudkan.
+                </li>
+                <li>
+                    <strong>👨‍🏭 Sambungan Las Presisi & Rapi:</strong>
+                    Mengutamakan teknik welding berkualitas tinggi sehingga konstruksi tidak hanya kuat dan kokoh, tetapi juga sedap dipandang.
+                </li>
+                <li>
+                    <strong>🛡️ Material Premium & Tahan Lama:</strong>
+                    Menggunakan rangka besi/logam berkualitas dengan finishing cat anti-karat yang awet untuk penggunaan jangka panjang.
+                </li>
+                <li>
+                    <strong>📐 Konsultasi Desain Gratis:</strong>
+                    Membantu mengukur dan menyesuaikan desain perabot agar pas (perfect fit) dengan tata ruang rumah atau bisnismu.
+                </li>
+            </ul>
+        </div>
+
+        <div class="hero-visual">
+            <div class="rhombus-frame">
+                <img src="mja esss.jpg" alt="Meja Custom WEL-G">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: DESKRIPSI PRODUK -->
+    <section class="description-banner">
+        <div class="circle-frame-container">
+            <div class="circle-frame">
+                <img src="mja sng.jpg" alt="Produk & Jasa WEL-G">
+            </div>
+        </div>
+
+        <div class="desc-text">
+            <h2>2. Deskripsi Produk WEL-G</h2>
+            <p class="tagline">"WEL-G — Solusi Perabot Custom & Jasa Las Modern"</p>
+            <p class="summary">
+                WEL-G adalah bisnis online manufaktur perabotan custom sekaligus penyedia jasa pengelasan (welding). WEL-G fokus menciptakan furniture berbasis logam/besi yang memadukan kekuatan struktur dengan sentuhan desain modern, minimalis, hingga industrial.
+            </p>
+
+            <h3>Produk & Layanan WEL-G:</h3>
+            <ul class="products-list">
+                <li>
+                    <strong>🏠 Furniture Rumah & Cafe Custom:</strong> Meja makan, meja konsol estetik, rak display, kursi, hingga rangka tempat tidur.
+                </li>
+                <li>
+                    <strong>🏗️ Konstruksi Arsitektural:</strong> Kanopi, pagar besi modern, teralis, dan railing tangga.
+                </li>
+                <li>
+                    <strong>⚡ Jasa Las / Welding:</strong> Layanan pengelasan presisi untuk perbaikan maupun fabrikasi besi/logam kustom.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECTION 3: DIFERENSIASI -->
+    <section class="diff-banner">
+        <div class="diff-text">
+            <h2>3. Diferensiasi WEL-G (Pembeda dari Kompetitor)</h2>
+            
+            <div class="comparison-container">
+                <!-- Komparasi 1 -->
+                <div class="comparison-box">
+                    <h3>🏬 Dibanding Toko Furniture Pabrikan:</h3>
+                    <div class="comp-item">
+                        <span class="label-bad">❌ Toko Pabrikan:</span> Ukuran kaku/tidak bisa diubah, bahan gampang rusak terkena air/rayap.
+                    </div>
+                    <div class="comp-item">
+                        <span class="label-good">✅ WEL-G:</span> Ukuran dan model bisa di-custom penuh, menggunakan rangka logam kokoh yang anti-rayap dan tahan lama.
+                    </div>
+                </div>
+
+                <!-- Komparasi 2 -->
+                <div class="comparison-box">
+                    <h3>👨‍🏭 Dibanding Bengkel Las Konvensional:</h3>
+                    <div class="comp-item">
+                        <span class="label-bad">❌ Bengkel Las Biasa:</span> Hanya fokus pada kekuatan fisik tanpa memikirkan kerapihan detail dan estetika interior.
+                    </div>
+                    <div class="comp-item">
+                        <span class="label-good">✅ WEL-G:</span> Menggabungkan keahlian teknik las dengan estetika desain interior modern. Hasil akhirnya tidak cuma kuat, tapi juga rapi, estetik, dan berkelas.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hexagon-frame-container">
+            <div class="hexagon-frame">
+                <img src="krsi.jpg" alt="Diferensiasi Kualitas WEL-G">
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
